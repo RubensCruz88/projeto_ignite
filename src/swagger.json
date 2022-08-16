@@ -1,0 +1,77 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Documentação de Aluguel",
+		"description": "Este é um aplicativo de aluguel",
+		"version": "1.0.0",
+		"contact": {
+			"email": "rubenscruz88@gmail.com"
+		}
+	},
+	"paths": {
+		"/categorias": {
+			"post": {
+				"tags": ["Categorias"],
+				"summary": "Cria a categoria",
+				"description": "Cria uma nova categoria",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"proprieties": {
+									"nome": {
+										"type": "string"
+									},
+									"descricao": {
+										"type": "string"
+									}
+								},
+								"example": {
+									"nome": "exemplo de nome de categoria",
+									"descricao": "exemplo de descricao de categoria"
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Created"
+					},
+					"500": {
+						"description": "Categoria já existe"
+					}
+				}
+			},
+			"get": {
+				"tags": ["Categorias"],
+				"summary": "Lista as categorias",
+				"description": "Lista todas as categorias",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"proprieties": {
+											"nome": {
+												"type": "string"
+											},
+											"descricao": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
