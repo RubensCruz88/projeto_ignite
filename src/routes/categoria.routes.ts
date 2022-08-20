@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import { criaCategoriaController } from '../modules/carros/useCases/criaCategoria';
-import { listaCategoriaController } from '../modules/carros/useCases/listaCategoria';
-import { importarCategoriaController } from '../modules/carros/useCases/importarCategorias';
+import { CriaCategoriaController } from '../modules/carros/useCases/criaCategoria/CriaCategoriaController';
+import { ImportarCategoriaController } from '../modules/carros/useCases/importarCategorias/importarCategoriaController';
+import { ListaCategoriaController } from '../modules/carros/useCases/listaCategoria/ListaCategoriaController';
 
 const categoriasRotas = Router();
 
@@ -11,17 +11,15 @@ const upload = multer({
 	dest: "./tmp"
 });
 
-categoriasRotas.post("/", (request, response) => {
-	return criaCategoriaController.handle(request, response);
-})
+const criaCategoriaController = new CriaCategoriaController();
+const listaCategoriaController = new ListaCategoriaController()
+const importarcategoriaController = new ImportarCategoriaController();
 
-categoriasRotas.get("/",(request, response) =>{
-	return listaCategoriaController.handle(request, response);
-})
+categoriasRotas.post("/", criaCategoriaController.handle);
 
-categoriasRotas.post("/importar",upload.single("file"),(request, response) =>{
-	return importarCategoriaController.handle(request, response);
-})
+categoriasRotas.get("/", listaCategoriaController.handle);
+
+categoriasRotas.post("/importar", importarcategoriaController.handle);
 
 
 export {categoriasRotas}

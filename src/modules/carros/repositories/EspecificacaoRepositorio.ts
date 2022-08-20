@@ -1,51 +1,48 @@
+import { Repository } from 'typeorm';
 import { Especificacao } from '../model/Especificacao';
+import { dataSource } from '../../../database/dataSource';
 
 interface ICriaEspecificacaoDTO {
 	nome: string;
 	descricao: string;
 }
 
-class EspecificacaoRepositorio {
-	private especificacoes: Especificacao[];
+interface IEspecificacaoRepositorio {
+	create({ nome, descricao }: ICriaEspecificacaoDTO): Promise<Especificacao>;
+	list(): Promise<Especificacao[]>;
+	VerificaDuplicado(nome: string): Promise<Especificacao>;
+}
 
-	private static INSTANCE: EspecificacaoRepositorio;
+class EspecificacaoRepositorio implements IEspecificacaoRepositorio{
+	private repositorio: Repository<Especificacao>
 
 	constructor(){
-		this.especificacoes = [];
+		this.repositorio = dataSource.getRepository(Especificacao);
 	}
 
-	public static getInstance(): EspecificacaoRepositorio {
-		if (!EspecificacaoRepositorio.INSTANCE) {
-			EspecificacaoRepositorio.INSTANCE = new EspecificacaoRepositorio();
-		}
-
-		return EspecificacaoRepositorio.INSTANCE;
-	};
-
-	create({ nome, descricao }: ICriaEspecificacaoDTO): Especificacao {
-		const especificacao = new Especificacao();
-
-		Object.assign(especificacao,{
+	async create({ nome, descricao }: ICriaEspecificacaoDTO): Promise<Especificacao> {
+		const especificacao = this.repositorio.create({
 			nome,
-			descricao,
-			created_at: new Date()
-		})
-
-		this.especificacoes.push(especificacao);
+			descricao
+		});
+		
+		await this.repositorio.save(especificacao);
 
 		return especificacao;
 	};
 
-	list(): Especificacao[] {
-		return this.especificacoes;
+	async list(): Promise<Especificacao[]> {
+		const especificacoes = await this.repositorio.find()
+
+		return especificacoes;
 	}
 
-	VerificaDuplicado(nome: string): Especificacao {
-		const especificacao = this.especificacoes.find( especificacao => especificacao.nome === nome);
+	async VerificaDuplicado(nome: string): Promise<Especificacao> {
+		const especificacao = await this.repositorio.findOneBy({nome});
 
 		return especificacao;
 	}
 
 }
 
-export { EspecificacaoRepositorio };
+export { IEspecificacaoRepositorio, EspecificacaoRepositorio };

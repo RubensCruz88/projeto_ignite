@@ -1,16 +1,27 @@
+import { inject, injectable} from 'tsyringe';
 import { Categoria } from '../../model/Categoria';
-import { CategoriaRepositorio } from '../../repositories/CategoriaRepositorio'
+import { ICategoriasRepositorio, CategoriaRepositorio } from '../../repositories/CategoriaRepositorio'
 
 interface IRequest {
 	nome: string;
 	descricao: string;
 }
 
+@injectable()
 class CriaCategoriaService {
-	constructor( private categoriaRepository: CategoriaRepositorio){}
+	constructor(
+		@inject("CategoriaRepositorio")
+		private categoriaRepository: ICategoriasRepositorio
+	){}
 
-	execute({ nome, descricao }: IRequest): Categoria {
-		const categoria = this.categoriaRepository.create({nome, descricao});
+	async execute({ nome, descricao }: IRequest): Promise<Categoria> {
+		const existeCategoria = await this.categoriaRepository.VerificaDuplicado(nome);
+
+		if(existeCategoria){
+			throw new Error("Categoria já existe");
+		}
+
+		const categoria = await this.categoriaRepository.create({nome, descricao});
 
 		return categoria;
 	}

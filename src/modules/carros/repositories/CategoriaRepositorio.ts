@@ -1,49 +1,48 @@
+import { Repository } from 'typeorm';
 import { Categoria } from '../model/Categoria';
+import { dataSource } from '../../../database/dataSource';
 
 interface ICriaCategoriaDTO {
 	nome: string;
 	descricao: string;
 }
 
-class CategoriaRepositorio{
-	private categorias: Categoria[];
+interface ICategoriasRepositorio {
+	create({nome, descricao}: ICriaCategoriaDTO): Promise<Categoria>
+	list(): Promise<Categoria[]>
+	VerificaDuplicado(nome: string): Promise<Categoria>
+}
 
-	private static INSTANCE: CategoriaRepositorio;
-
+class CategoriaRepositorio implements ICategoriasRepositorio{
+	private repositorio: Repository<Categoria>
+	
 	constructor(){
-		this.categorias = [];
+		this.repositorio = dataSource.getRepository(Categoria);
 	}
 
-	public static getInstance(): CategoriaRepositorio {
-		if (!CategoriaRepositorio.INSTANCE) {
-			CategoriaRepositorio.INSTANCE = new CategoriaRepositorio();
-		}
-
-		return CategoriaRepositorio.INSTANCE;
-	};
-
-	create({ nome, descricao }: ICriaCategoriaDTO): Categoria {
-		const categoria = new Categoria(); 
-		Object.assign(categoria,{
-			nome,
-			descricao,
-			created_at: new Date()
-		});
+	async create({ nome, descricao }: ICriaCategoriaDTO): Promise<Categoria> {
 	
-		this.categorias.push(categoria);
-
+		const categoria = this.repositorio.create({
+			nome,
+			descricao
+		})
+	
+		await this.repositorio.save(categoria);
+		
 		return categoria;
 	};
 
-	list(): Categoria[] {
-		return this.categorias;
+	async list(): Promise<Categoria[]> {
+		const categorias = await this.repositorio.find();
+
+		return categorias;
 	}
 
-	VerificaDuplicado(nome: string): Categoria {
-		const categoria = this.categorias.find( categoria => categoria.nome === nome);
+	async VerificaDuplicado(nome: string): Promise<Categoria> {
+		const categoria = await this.repositorio.findOneBy({nome});
 
 		return categoria;
 	}
 }
 
-export { CategoriaRepositorio };
+export { CategoriaRepositorio, ICategoriasRepositorio };

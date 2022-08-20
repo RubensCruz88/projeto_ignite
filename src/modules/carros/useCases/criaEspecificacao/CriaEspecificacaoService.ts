@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe';
 import { Especificacao } from '../../model/Especificacao';
 import { EspecificacaoRepositorio } from '../../repositories/EspecificacaoRepositorio';
 
@@ -6,11 +7,21 @@ interface IRequest {
 	descricao: string;
 }
 
+@injectable()
 class CriaEspecificacaoService {
-	constructor( private especificacaoRepository: EspecificacaoRepositorio){}
+	constructor(
+		@inject("EspecificacaoRepositorio")
+		private especificacaoRepository: EspecificacaoRepositorio
+	){}
 
-	execute({nome, descricao}: IRequest): Especificacao {
-		const especificacao = this.especificacaoRepository.create({nome, descricao});
+	async execute({nome, descricao}: IRequest): Promise<Especificacao> {
+		const especificacaoExiste = await this.especificacaoRepository.VerificaDuplicado(nome);
+
+		if(especificacaoExiste){
+			throw new Error("Especificação ja existe");
+		}
+
+		const especificacao = await this.especificacaoRepository.create({nome, descricao});
 	
 		return especificacao;
 	}

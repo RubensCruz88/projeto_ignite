@@ -1,14 +1,19 @@
+import { inject, injectable } from 'tsyringe';
 import fs from 'fs';
 import { parse } from 'csv-parse';
-import {CategoriaRepositorio} from '../../repositories/CategoriaRepositorio';
+import { CategoriaRepositorio } from '../../repositories/CategoriaRepositorio';
 
 interface IImportarCategoria{
 	nome: string;
 	descricao: string;
 }
 
-class ImportarCategoriaUseCase {
-	constructor(private categoriaRepositorio: CategoriaRepositorio){}
+@injectable()
+class ImportarCategoriaService {
+	constructor(
+		@inject("CategoriaRepositorio")
+		private categoriaRepositorio: CategoriaRepositorio
+	){}
 
 	carregaCategorias(file: Express.Multer.File): Promise<IImportarCategoria[]>{
 		return new Promise((resolve,reject) =>{
@@ -53,4 +58,4 @@ class ImportarCategoriaUseCase {
 	}
 }
 
-export { ImportarCategoriaUseCase }
+export { ImportarCategoriaService }

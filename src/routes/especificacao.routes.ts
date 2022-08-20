@@ -1,16 +1,15 @@
 import { Router } from 'express';
 
-import { criaEspecificacaoController } from '../modules/carros/useCases/criaEspecificacao'
-import { listaEspecificacaoController } from '../modules/carros/useCases/listaEspecificacao'
+import { CriaEspecificacaoController } from "../modules/carros/useCases/criaEspecificacao/CriaEspecificacaoController";
+import { ListaEspecificacaoController } from '../modules/carros/useCases/listaEspecificacao/ListaEspecificacaoController'
 
 const especificacaoRotas = Router();
 
-especificacaoRotas.post("/", (request, response) => {
-	criaEspecificacaoController.handle(request, response);
-})
+const criaEspecificacao = new CriaEspecificacaoController();
+const listaEspecificacao = new ListaEspecificacaoController()
 
-especificacaoRotas.get("/",(request, response) =>{
-	listaEspecificacaoController.handle(request, response);
-})
+especificacaoRotas.post("/", criaEspecificacao.handle);
+
+especificacaoRotas.get("/", listaEspecificacao.handle);
 
 export {especificacaoRotas};
