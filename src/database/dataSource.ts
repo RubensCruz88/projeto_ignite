@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 const dataSource = new DataSource({
 	type: "postgres",
 	port: 5432,
-	host: "database_ignite",
+	host: "localhost",
 	username: "docker",
 	password: "docker",
 	database: "rentx",
@@ -11,10 +11,9 @@ const dataSource = new DataSource({
 	migrations: ["src/database/migrations/*.ts"]
 });
 
-dataSource
-	.initialize()
-	.then(() => console.log("Banco de dados rodando"))
-	.catch((err) => console.log("Erro na inicialização do banco de dados",err));
+export function createConnection(host = "database_ignite"): Promise<DataSource> {
+	return dataSource.setOptions({host}).initialize()
+}
 
 
 export { dataSource };
