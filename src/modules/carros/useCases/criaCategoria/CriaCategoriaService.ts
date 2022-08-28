@@ -1,3 +1,4 @@
+import { AppError } from '../../../../errors/AppError';
 import { inject, injectable} from 'tsyringe';
 import { Categoria } from '../../model/Categoria';
 import { ICategoriasRepositorio, CategoriaRepositorio } from '../../repositories/CategoriaRepositorio'
@@ -18,7 +19,7 @@ class CriaCategoriaService {
 		const existeCategoria = await this.categoriaRepository.VerificaDuplicado(nome);
 
 		if(existeCategoria){
-			throw new Error("Categoria já existe");
+			throw new AppError("Categoria já existe");
 		}
 
 		const categoria = await this.categoriaRepository.create({nome, descricao});

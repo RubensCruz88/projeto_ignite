@@ -9,7 +9,7 @@ class ImportarCategoriaController{
 
 		const importaCategoriaService = container.resolve(ImportarCategoriaService);
 
-		await importaCategoriaService.execute();
+		await importaCategoriaService.execute(file);
 
 		return response.send();
 	}

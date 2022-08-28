@@ -1,3 +1,4 @@
+import { AppError } from '../../../../errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import { Especificacao } from '../../model/Especificacao';
 import { EspecificacaoRepositorio } from '../../repositories/EspecificacaoRepositorio';
@@ -18,7 +19,7 @@ class CriaEspecificacaoService {
 		const especificacaoExiste = await this.especificacaoRepository.VerificaDuplicado(nome);
 
 		if(especificacaoExiste){
-			throw new Error("Especificação ja existe");
+			throw new AppError("Especificação ja existe");
 		}
 
 		const especificacao = await this.especificacaoRepository.create({nome, descricao});

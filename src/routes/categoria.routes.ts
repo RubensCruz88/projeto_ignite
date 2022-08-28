@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import multer from 'multer';
 
+import { confereAutenticado } from '../middlewares/confereAutenticado';
+
 import { CriaCategoriaController } from '../modules/carros/useCases/criaCategoria/CriaCategoriaController';
 import { ImportarCategoriaController } from '../modules/carros/useCases/importarCategorias/importarCategoriaController';
 import { ListaCategoriaController } from '../modules/carros/useCases/listaCategoria/ListaCategoriaController';
@@ -15,7 +17,7 @@ const criaCategoriaController = new CriaCategoriaController();
 const listaCategoriaController = new ListaCategoriaController()
 const importarcategoriaController = new ImportarCategoriaController();
 
-categoriasRotas.post("/", criaCategoriaController.handle);
+categoriasRotas.post("/", confereAutenticado,criaCategoriaController.handle);
 
 categoriasRotas.get("/", listaCategoriaController.handle);
 

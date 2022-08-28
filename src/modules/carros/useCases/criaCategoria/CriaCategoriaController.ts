@@ -9,13 +9,9 @@ class CriaCategoriaController {
 
 		const criaCategoriaService = container.resolve(CriaCategoriaService)
 
-		try {
-			const categoria = await criaCategoriaService.execute({nome, descricao});
+		const categoria = await criaCategoriaService.execute({nome, descricao});
 
-			return response.json(categoria);
-		} catch(err){
-			return response.status(400).json({erro: err.message});
-		}
+		return response.json(categoria);
 	}
 
 }
