@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import './database/dataSource';
-import "./shared/container";
+import "@shared/container";
 
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
@@ -12,7 +12,7 @@ import { autenticaRotas } from './routes/autentica.routes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerFile from "./swagger.json";
 import { createConnection } from './database/dataSource';
-import { AppError } from './errors/AppError';
+import { AppError } from '@errors/AppError';
 
 const app = express();
 

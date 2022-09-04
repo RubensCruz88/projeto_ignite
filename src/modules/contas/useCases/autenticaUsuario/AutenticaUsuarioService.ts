@@ -1,4 +1,4 @@
-import { AppError } from '../../../../errors/AppError';
+import { AppError } from '@errors/AppError';
 import { inject, injectable } from "tsyringe";
 import { IUsuarioRepositorio } from "../../repositories/UsuarioRepositorio";
 import { sign } from 'jsonwebtoken';
