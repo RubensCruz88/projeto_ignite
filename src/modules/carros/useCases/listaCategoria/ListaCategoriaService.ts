@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
-import { Categoria } from '../../model/Categoria';
-import { CategoriaRepositorio } from '../../repositories/CategoriaRepositorio';
+import { Categoria } from '../../infra/typeorm/model/Categoria';
+import { CategoriaRepositorio } from '../../infra/typeorm/repositories/CategoriaRepositorio';
 
 @injectable()
 class ListaCategoriaService {

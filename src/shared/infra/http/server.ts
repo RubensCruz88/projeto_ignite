@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import './database/dataSource';
+import '../typeorm/dataSource';
 import "@shared/container";
 
 import express, { Request, Response, NextFunction } from 'express';
@@ -10,9 +10,9 @@ import { usersRotas } from './routes/usuario.routes';
 import { autenticaRotas } from './routes/autentica.routes';
 
 import swaggerUi from 'swagger-ui-express';
-import swaggerFile from "./swagger.json";
-import { createConnection } from './database/dataSource';
-import { AppError } from '@errors/AppError';
+import swaggerFile from "../../../swagger.json";
+import { createConnection } from '../typeorm/dataSource';
+import { AppError } from '@shared/errors/AppError';
 
 const app = express();
 

@@ -1,7 +1,7 @@
 import { Usuario } from '../model/Usuario';
-import { ICriaUsuarioDTO } from '../dtos/ICriaUsuarioDTO';
 import { Repository } from 'typeorm';
-import { dataSource } from '../../../database/dataSource';
+import { ICriaUsuarioDTO } from '@modules/contas/dtos/ICriaUsuarioDTO';
+import { dataSource } from '@shared/infra/typeorm/dataSource';
 
 interface IUsuarioRepositorio {
 	create(dados: ICriaUsuarioDTO): Promise<Usuario>

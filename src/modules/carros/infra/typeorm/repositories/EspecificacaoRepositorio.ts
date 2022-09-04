@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
 import { Especificacao } from '../model/Especificacao';
-import { dataSource } from '../../../database/dataSource';
+import { dataSource } from '../../../../../shared/infra/typeorm/dataSource';
 
 interface ICriaEspecificacaoDTO {
 	nome: string;

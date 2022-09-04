@@ -1,8 +1,8 @@
-import { AppError } from '@errors/AppError';
+import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from "tsyringe";
 import { ICriaUsuarioDTO } from "../../dtos/ICriaUsuarioDTO";
-import { Usuario } from "../../model/Usuario";
-import { IUsuarioRepositorio, UsuarioRepositorio } from "../../repositories/UsuarioRepositorio";
+import { Usuario } from "../../infra/typeorm/model/Usuario";
+import { IUsuarioRepositorio, UsuarioRepositorio } from "../../infra/typeorm/repositories/UsuarioRepositorio";
 import { hash } from 'bcryptjs';
 
 @injectable()

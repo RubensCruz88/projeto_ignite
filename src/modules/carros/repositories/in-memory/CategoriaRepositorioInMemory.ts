@@ -1,5 +1,5 @@
-import { Categoria } from "../../model/Categoria";
-import { ICategoriasRepositorio } from "../CategoriaRepositorio";
+import { Categoria } from "../../infra/typeorm/model/Categoria";
+import { ICategoriasRepositorio } from "../../infra/typeorm/repositories/CategoriaRepositorio";
 
 class CategoriaRepositorioInMemory implements ICategoriasRepositorio{
 	categorias: Categoria[] = [];

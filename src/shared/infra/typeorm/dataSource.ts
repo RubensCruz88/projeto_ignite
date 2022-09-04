@@ -8,7 +8,7 @@ const dataSource = new DataSource({
 	password: "docker",
 	database: "rentx",
 	entities: ["src/modules/**/model/*.ts"],
-	migrations: ["src/database/migrations/*.ts"]
+	migrations: ["src/shared/infra/typeorm/migrations/*.ts"]
 });
 
 export function createConnection(host = "database_ignite"): Promise<DataSource> {

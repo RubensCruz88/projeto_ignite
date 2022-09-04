@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 --transpile-only --poll --ignore-watch node_modules --respawn src/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 --transpile-only --poll --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "typeorm:migration:create": "ts-node-dev ./node_modules/typeorm/cli.js migration:create",
-    "typeorm:migration:run": "ts-node-dev ./node_modules/typeorm/cli.js migration:run -d src/database/dataSource.ts",
-    "typeorm:migration:revert": "ts-node-dev ./node_modules/typeorm/cli.js migration:revert -d src/database/dataSource.ts",
+    "typeorm:migration:run": "ts-node-dev ./node_modules/typeorm/cli.js migration:run -d src/shared/infra/typeorm/dataSource.ts",
+    "typeorm:migration:revert": "ts-node-dev ./node_modules/typeorm/cli.js migration:revert -d src/shared/infra/typeorm/dataSource.ts",
     "test": "jest"
   },
   "keywords": [],

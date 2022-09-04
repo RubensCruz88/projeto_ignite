@@ -3,9 +3,9 @@ import multer from 'multer';
 
 import { confereAutenticado } from '../middlewares/confereAutenticado';
 
-import { CriaCategoriaController } from '../modules/carros/useCases/criaCategoria/CriaCategoriaController';
-import { ImportarCategoriaController } from '../modules/carros/useCases/importarCategorias/importarCategoriaController';
-import { ListaCategoriaController } from '../modules/carros/useCases/listaCategoria/ListaCategoriaController';
+import { CriaCategoriaController } from '@modules/carros/useCases/criaCategoria/CriaCategoriaController';
+import { ImportarCategoriaController } from '@modules/carros/useCases/importarCategorias/importarCategoriaController';
+import { ListaCategoriaController } from '@modules/carros/useCases/listaCategoria/ListaCategoriaController';
 
 const categoriasRotas = Router();
 

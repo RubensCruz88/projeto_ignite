@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
 import { Categoria } from '../model/Categoria';
-import { dataSource } from '../../../database/dataSource';
+import { dataSource } from '@shared/infra/typeorm/dataSource';
 
 interface ICriaCategoriaDTO {
 	nome: string;

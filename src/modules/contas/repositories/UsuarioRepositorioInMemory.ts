@@ -1,5 +1,5 @@
-import { Usuario } from "../model/Usuario";
-import { IUsuarioRepositorio } from "./UsuarioRepositorio";
+import { Usuario } from "../infra/typeorm/model/Usuario";
+import { IUsuarioRepositorio } from "../infra/typeorm/repositories/UsuarioRepositorio";
 import { ICriaUsuarioDTO } from '../dtos/ICriaUsuarioDTO';
 
 class UsuarioRepositorioInMemory implements IUsuarioRepositorio {

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { AutenticaUsuarioController } from '../modules/contas/useCases/autenticaUsuario/AutenticaUsuarioController';
+import { AutenticaUsuarioController } from '@modules/contas/useCases/autenticaUsuario/AutenticaUsuarioController';
 
 const autenticaRotas = Router();
 

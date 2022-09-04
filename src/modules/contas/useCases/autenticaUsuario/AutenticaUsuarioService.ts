@@ -1,6 +1,6 @@
-import { AppError } from '@errors/AppError';
+import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from "tsyringe";
-import { IUsuarioRepositorio } from "../../repositories/UsuarioRepositorio";
+import { IUsuarioRepositorio } from "../../infra/typeorm/repositories/UsuarioRepositorio";
 import { sign } from 'jsonwebtoken';
 
 import { compare } from 'bcryptjs';

@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import fs from 'fs';
 import { parse } from 'csv-parse';
-import { CategoriaRepositorio } from '../../repositories/CategoriaRepositorio';
+import { CategoriaRepositorio } from '../../infra/typeorm/repositories/CategoriaRepositorio';
 
 interface IImportarCategoria{
 	nome: string;

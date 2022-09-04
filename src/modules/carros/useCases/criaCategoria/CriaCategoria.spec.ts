@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { CriaCategoriaService } from '../criaCategoria/CriaCategoriaService'	
 import { CategoriaRepositorioInMemory } from '../../repositories/in-memory/CategoriaRepositorioInMemory';
-import { AppError } from '@errors/AppError';
+import { AppError } from '@shared/errors/AppError';
 
 let criaCategoriaService: CriaCategoriaService;
 let categoriaRepositorioInMemory: CategoriaRepositorioInMemory;
