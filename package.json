@@ -9,7 +9,8 @@
     "typeorm:migration:create": "ts-node-dev ./node_modules/typeorm/cli.js migration:create",
     "typeorm:migration:run": "ts-node-dev ./node_modules/typeorm/cli.js migration:run -d src/shared/infra/typeorm/dataSource.ts",
     "typeorm:migration:revert": "ts-node-dev ./node_modules/typeorm/cli.js migration:revert -d src/shared/infra/typeorm/dataSource.ts",
-    "test": "jest"
+    "test": "jest",
+	"seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
   },
   "keywords": [],
   "author": "",

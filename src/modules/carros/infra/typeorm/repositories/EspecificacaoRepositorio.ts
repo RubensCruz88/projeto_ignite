@@ -1,17 +1,8 @@
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Especificacao } from '../model/Especificacao';
 import { dataSource } from '../../../../../shared/infra/typeorm/dataSource';
-
-interface ICriaEspecificacaoDTO {
-	nome: string;
-	descricao: string;
-}
-
-interface IEspecificacaoRepositorio {
-	create({ nome, descricao }: ICriaEspecificacaoDTO): Promise<Especificacao>;
-	list(): Promise<Especificacao[]>;
-	VerificaDuplicado(nome: string): Promise<Especificacao>;
-}
+import { ICriaEspecificacaoDTO } from '../../../DTOs/ICriaEspecificacaoDTO';
+import { IEspecificacaoRepositorio } from '@modules/carros/repositories/IEspecificacaoRepositorio';
 
 class EspecificacaoRepositorio implements IEspecificacaoRepositorio{
 	private repositorio: Repository<Especificacao>
@@ -41,6 +32,12 @@ class EspecificacaoRepositorio implements IEspecificacaoRepositorio{
 		const especificacao = await this.repositorio.findOneBy({nome});
 
 		return especificacao;
+	}
+
+	async buscaPorIds(ids: string[]): Promise<Especificacao[]> {
+		const especificacoes = await this.repositorio.findBy({ id: In(ids) });
+
+		return especificacoes;
 	}
 
 }

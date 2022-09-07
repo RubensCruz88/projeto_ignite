@@ -6,6 +6,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import { categoriasRotas } from './routes/categoria.routes';
 import { especificacaoRotas } from './routes/especificacao.routes';
+import { carroRotas } from './routes/carro.routes';
 import { usersRotas } from './routes/usuario.routes';
 import { autenticaRotas } from './routes/autentica.routes';
 
@@ -32,6 +33,7 @@ app.get("/",(request,response) => {
 app.use(autenticaRotas);
 app.use("/categorias",categoriasRotas);
 app.use("/especificacao",especificacaoRotas);
+app.use("/carro",carroRotas);
 app.use('/usuario',usersRotas);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
