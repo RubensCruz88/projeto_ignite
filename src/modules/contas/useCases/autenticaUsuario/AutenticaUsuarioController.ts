@@ -11,7 +11,7 @@ class AutenticaUsuarioController{
 		try {
 			const token = await autenticaUsuarioService.execute({email, senha});
 
-			return response.json(token);
+			return response.status(201).json(token);
 		} catch(err) {
 			return response.status(400).json({err: err.message});
 		}

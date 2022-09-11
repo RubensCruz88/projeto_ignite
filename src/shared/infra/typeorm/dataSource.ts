@@ -13,8 +13,12 @@ const dataSource = new DataSource({
 	logging: ["error"]
 });
 
-export function createConnection(host = "database_ignite"): Promise<DataSource> {
-	return dataSource.setOptions({host}).initialize()
+export function createConnection(host = "database_ignite", database = "rentx"): Promise<DataSource> {
+
+	return dataSource.setOptions({
+		host,
+		database
+	}).initialize()
 }
 
 
